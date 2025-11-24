@@ -78,7 +78,7 @@ pip install fastai
        print("❌ CUDA 仍不可用，请检查安装。")
    ```
 
-   4. 想要在python 中访问外网的接口，首先需要开启代理之后再添加下面代码
+4. 想要在python 中访问外网的接口，首先需要开启代理之后再添加下面代码
 
    ```python
    import os
@@ -88,7 +88,7 @@ pip install fastai
    os.environ['HTTPS_PROXY'] = 'http://127.0.0.1:7890'
    ```
 
-   5. 报错为：
+5. 报错为：
 
    ```python
    RuntimeError: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 2: out of memory
@@ -96,9 +96,28 @@ pip install fastai
    RuntimeError: DataLoader worker (pid(s) 16636) exited unexpectedly [W1124 14:11:39.000000000 CudaIPCTypes.cpp:16] Producer process has been terminated before all shared CUDA tensors released. See Note [Sharing CUDA tensors]
    ```
 
-   
+    ① cudaGetDeviceCount() error 2: out of memory
 
-   
+   这个错误一般不是显存真的不足，而是：
+
+   在 fork 出 DataLoader worker 前，GPU 已经被主进程初始化，导致子进程无法重新初始化 CUDA。
+
+   👉 Windows DataLoader 使用 `spawn`，不能在 worker 里重新创建 CUDA 上下文。
+
+   ② DataLoader worker exited unexpectedly
+
+   num_workers > 0 会让每个子进程尝试使用 GPU，从而崩溃。很多 Windows + fastai + PyTorch 用户都会遇到这个情况
+
+​		解决方式为：
+
+```
+```
+
+
+
+
+
+
 
 
 
