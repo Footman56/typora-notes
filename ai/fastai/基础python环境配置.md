@@ -51,6 +51,41 @@ pip install fastai
    NVIDIA GeForce RTX 5060 Ti with CUDA capability sm_120 is not compatible with the current PyTorch installation. The current PyTorch install supports CUDA capabilities sm_50 sm_60 sm_61 sm_70 sm_75 sm_80 sm_86 sm_90. If you want to use the NVIDIA GeForce RTX 5060 Ti GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
    ```
 
-   5060Ti 显卡是比较新的,PyTorch 版本与显卡有冲突
+   5060Ti 显卡是比较新的,PyTorch 版本与显卡有冲突。 需要安装兼容 CUDA version 12.9  的pyTorch
+
+   ```python
+   pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128	
+   ```
+
+   用于验证安装成功的脚本为：
+
+   ```python
+   import torch
+   
+   print("PyTorch 版本：", torch.__version__)
+   print("CUDA 可用：", torch.cuda.is_available())
+   print("支持的 CUDA 版本：", torch.version.cuda)
+   print("当前GPU设备：", torch.cuda.current_device())
+   print("设备名称：", torch.cuda.get_device_name())
+   
+   # 进行一个简单的GPU计算测试
+   if torch.cuda.is_available():
+       x = torch.tensor([1.0, 2.0, 3.0]).cuda()
+       y = x * 2
+       print("测试张量计算：", y)
+       print("✅ 恭喜！PyTorch 已成功配置并运行在你的 RTX 5060 Ti 上。")
+   else:
+       print("❌ CUDA 仍不可用，请检查安装。")
+   ```
+
+   4. 想要在python 中访问外网的接口，首先需要开启代理之后再添加下面代码
+
+   ```
+   ```
 
    
+
+   
+
+
+
