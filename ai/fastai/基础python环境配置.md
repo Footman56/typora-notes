@@ -110,7 +110,48 @@ pip install fastai
 
 ​		解决方式为：
 
-```
+```python
+dls = DataBlock(
+        blocks=(ImageBlock, CategoryBlock),
+        get_items=get_image_files,
+        splitter=RandomSplitter(valid_pct=0.2, seed=42),
+        get_y=parent_label,
+        item_tfms=[Resize(192, method='squish')]
+    ).dataloaders(
+        path,
+        bs=16,  # ↓ 显存不够就改 8 或 4
+        num_workers=0  # ★★★ 关键：解决你所有 worker GPU 报错
+    )
+
+    # dls.show_batch(max_n=6)
+
+    # ====================================
+    # 2. 创建 learner（不用传 device）
+    #    + 使用半精度训练减少显存
+    # ====================================
+    learn = vision_learner(
+        dls,
+        resnet18,
+        metrics=error_rate,
+        pretrained=True,
+        normalize=True
+    ).to_fp16()  # ★★★ 强烈推荐：减少显存使用一半
+
+    # ====================================
+    # 3. 清空 GPU 显存（防止 CUDA 已初始化）
+    # ====================================
+    import torch
+
+    torch.cuda.empty_cache()
+
+    # ====================================
+    # 4. 开始训练（不会再报错）
+    # ====================================
+    learn.fine_tune(3)
+
+    is_bird, _, probs = learn.predict(PILImage.create('img.png'))
+    print(f"This is a: {is_bird}.")
+    print(f"Probability it's a bird: {probs[0]:.4f}")
 ```
 
 
