@@ -80,7 +80,18 @@ pip install fastai
 
    4. 想要在python 中访问外网的接口，首先需要开启代理之后再添加下面代码
 
+   ```python
+   import os
+   
+   # 需要修改代理的端口 一般clash 的端口为7890
+   os.environ['HTTP_PROXY'] = 'http://127.0.0.1:1080'
+   os.environ['HTTPS_PROXY'] = 'http://127.0.0.1:1080'
    ```
+
+   5. 报错为：
+
+   ```python
+   RuntimeError: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 2: out of memory
    ```
 
    
