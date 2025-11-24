@@ -84,14 +84,16 @@ pip install fastai
    import os
    
    # 需要修改代理的端口 一般clash 的端口为7890
-   os.environ['HTTP_PROXY'] = 'http://127.0.0.1:1080'
-   os.environ['HTTPS_PROXY'] = 'http://127.0.0.1:1080'
+   os.environ['HTTP_PROXY'] = 'http://127.0.0.1:7890'
+   os.environ['HTTPS_PROXY'] = 'http://127.0.0.1:7890'
    ```
 
    5. 报错为：
 
    ```python
    RuntimeError: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 2: out of memory
+   
+   RuntimeError: DataLoader worker (pid(s) 16636) exited unexpectedly [W1124 14:11:39.000000000 CudaIPCTypes.cpp:16] Producer process has been terminated before all shared CUDA tensors released. See Note [Sharing CUDA tensors]
    ```
 
    
