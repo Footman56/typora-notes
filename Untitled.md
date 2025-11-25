@@ -9,3 +9,14 @@
 
 
 ![image-20251125202450869](https://raw.githubusercontent.com/Footman56/images/master/img202511252024929.png)
+
+
+
+
+
+```
+1. 信息收集
+FOFA 搜索 暴露出来的网络
+2. 漏洞探测
+```
+
