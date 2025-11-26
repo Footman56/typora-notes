@@ -16,7 +16,9 @@ conda activate fastai-env
 2. 安装 PyTorch（根据你的 NVIDIA 显卡自动安装 CUDA）
 
 ```
-conda install pytorch torchvision torchaudio cudatoolkit=11.8 -c pytorch -c nvidia
+
+# conda install pytorch torchvision torchaudio cudatoolkit=11.8 -c pytorch -c nvidia
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128	
 ```
 
 3. 安装 fastai
