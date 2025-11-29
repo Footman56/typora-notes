@@ -132,6 +132,17 @@ print(f"转置:\n{x_t}, 形状: {x_t.shape}")
 x_3d = torch.randn(2, 3, 4)
 x_permuted = x_3d.permute(2, 0, 1)  # 维度顺序从[0,1,2]变为[2,0,1]
 print(f"维度交换后形状: {x_permuted.shape}")  # torch.Size([4, 2, 3])
+
+
+# 对于4维张量：
+# 正索引：   0,    1,   2,  3
+# 负索引：  -4,   -3,  -2, -1
+torch.transpose(input, dim0, dim1) # input:输入张量 ; dim0: 要交换的第一个维度; dim1: 要交换的第二个维度
+# 转置：交换第0维和第1维
+x_t = torch.transpose(x, 0, 1)
+print("\n转置后:")
+print(x_t)
+print(f"形状: {x_t.shape}")  # torch.Size([3, 2])
 ```
 
 
