@@ -91,4 +91,10 @@ print(g.dim()) # 返回维度
 torch.zeros(8, 12)
 ```
 
-## 
+## arange
+
+```
+# 
+torch.arange(0, 8)
+```
+
