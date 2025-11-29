@@ -51,21 +51,9 @@ d = torch.randn(2, 3, device=device)
 print(d)
 ```
 
-
+## 形状
 
 ```python
-# 张量相加
-e = torch.randn(2, 3)
-f = torch.randn(2, 3)
-print(e + f)
-
-# 逐元素乘法
-print(e * f)
-
-# 张量的转置
-g = torch.randn(3, 2)
-print(g.t())  # 或者 g.transpose(0, 1)
-
 # 张量的形状
 print(g.shape)  # 返回形状
 print(g.dim()) # 返回维度
@@ -92,19 +80,12 @@ print(g.dim()) # 返回维度
 技巧： 先看原始向量的size， size的下标从0开始
 
 ```python
-# 从向量 -> 矩阵 -> 3维张量
+# 新增维度
 x = torch.tensor([1, 2, 3, 4])
 print(f"原始: {x.shape}")  # torch.Size([4])
 
 # 增加行维度（变成单行矩阵）
-x_row = x.unsqueeze(0)     # 或 x[None, :],在下标为0的地方 添加维度1
-'''
-torch.Size([4]) =》torch.Size([1, 4]) 
-[[1],
-[2],
-[3],
-[4]]
-'''
+x_row = x.unsqueeze(0)     # 或 x[None, :],在下标为0的地方 添加维度1 torch.Size([4]) =》torch.Size([1, 4]) 
 print(f"行向量: {x_row.shape}")  #  
 
 
@@ -113,5 +94,64 @@ x_col = x.unsqueeze(1)     # 或 x[:, None]
 print(f"列向量: {x_col.shape}")  # torch.Size([4, 1])
 ```
 
+```python
+# 移除维度
+x = torch.randn(1, 3, 1, 5)
+print(f"原始形状: {x.shape}")  # torch.Size([1, 3, 1, 5])
 
+y = x.squeeze()  # 移除所有长度为1的维度
+print(f"squeeze后: {y.shape}")  # torch.Size([3, 5])
+
+z = x.squeeze(0)  # 只移除第0维
+print(f"squeeze(0)后: {z.shape}")  # torch.Size([3, 1, 5])
+```
+
+```python
+x = torch.arange(12)  # tensor([0, 1, 2, ..., 11])
+print(f"原始: {x.shape}")  # torch.Size([12])
+
+# 重塑为2x6矩阵
+x_2d = x.view(2, 6)
+print(f"2x6矩阵:\n{x_2d}")
+
+# 重塑为3x2x2的3维张量
+x_3d = x.reshape(3, 2, 2)
+print(f"3x2x2张量:\n{x_3d}")
+```
+
+```python
+x = torch.tensor([[1, 2, 3],
+                  [4, 5, 6]])
+print(f"原始:\n{x}, 形状: {x.shape}")
+
+# 转置
+x_t = x.T  # 或 x.transpose(0, 1)
+print(f"转置:\n{x_t}, 形状: {x_t.shape}")
+
+# 维度交换
+x_3d = torch.randn(2, 3, 4)
+x_permuted = x_3d.permute(2, 0, 1)  # 维度顺序从[0,1,2]变为[2,0,1]
+print(f"维度交换后形状: {x_permuted.shape}")  # torch.Size([4, 2, 3])
+```
+
+
+
+## 张量运算
+
+```python
+# 矩阵乘法要求： (m×n) @ (n×p) = (m×p)
+A = torch.randn(2, 3)    # 2x3
+B = torch.randn(3, 4)    # 3x4
+C = A @ B     
+```
+
+```python
+# 张量相加
+e = torch.randn(2, 3)
+f = torch.randn(2, 3)
+print(e + f)
+
+# 逐元素乘法
+print(e * f)
+```
 
