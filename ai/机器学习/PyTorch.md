@@ -11,8 +11,6 @@ PyTorch  是用于机器学习计算的包
 
 
 
-# torch
-
 ## 张量（Tensor）
 
 是 PyTorch 中的核心数据结构，用于存储和操作多维数组。 可以使用GPU进行计算加速
@@ -130,7 +128,7 @@ print(f"转置:\n{x_t}, 形状: {x_t.shape}")
 
 # 维度交换
 x_3d = torch.randn(2, 3, 4)
-x_permuted = x_3d.permute(2, 0, 1)  # 维度顺序从[0,1,2]变为[2,0,1]
+x_permuted = x_3d.permute(2, 0, 1)  # 维度顺序从[0,1,2]变为[2,0,1] 重新排列所有维度
 print(f"维度交换后形状: {x_permuted.shape}")  # torch.Size([4, 2, 3])
 
 
@@ -164,5 +162,13 @@ print(e + f)
 
 # 逐元素乘法
 print(e * f)
+```
+
+
+
+## softmax
+
+```python
+torch.softmax 是一个用于将数值转换为概率分布的函数
 ```
 
