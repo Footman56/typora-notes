@@ -36,6 +36,9 @@ print(b)
 c = torch.randn(2, 3)
 print(c)
 
+# arange :创建等间隔数值序列,返回的结构是向量 [0,2,4,6]
+torch.arange(0, 8,2)
+
 # 从 NumPy 数组创建张量
 import numpy as np
 numpy_array = np.array([[1, 2], [3, 4]])
@@ -84,10 +87,31 @@ print(g.dim()) # 返回维度
   ```
 
 
-## arange
+## 维度变化
+
+技巧： 先看原始向量的size， size的下标从0开始
 
 ```python
-# 创建等间隔数值序列,返回的结构是向量 [0,1,2,3,4,5,6,7]
-torch.arange(0, 8)
+# 从向量 -> 矩阵 -> 3维张量
+x = torch.tensor([1, 2, 3, 4])
+print(f"原始: {x.shape}")  # torch.Size([4])
+
+# 增加行维度（变成单行矩阵）
+x_row = x.unsqueeze(0)     # 或 x[None, :],在下标为0的地方 添加维度1
+'''
+torch.Size([4]) =》torch.Size([1, 4]) 
+[[1],
+[2],
+[3],
+[4]]
+'''
+print(f"行向量: {x_row.shape}")  #  
+
+
+# 增加列维度（变成单列矩阵）
+x_col = x.unsqueeze(1)     # 或 x[:, None]
+print(f"列向量: {x_col.shape}")  # torch.Size([4, 1])
 ```
+
+
 
