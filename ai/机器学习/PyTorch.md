@@ -189,11 +189,36 @@ tensor([[0.2424, 0.4652, 0.7028, 0.8654],
 
 
 
+## log
+
 ```python
 import math
 
 # 两种形式：
 math.log(x)        # 计算x的自然对数（以e为底）
 math.log(x, base)  # 计算以base为底的x的对数
+```
+
+## Linear
+
+- **输入维度**: `d_model`
+- **输出维度**: `d_k`
+- **数学运算**: `y = xW^T + b`
+
+```python
+# 用于将特征进行压缩或者扩大
+import torch
+import torch.nn as nn
+
+# nn.Linear(d_model, d_k) 
+
+# 创建线性层
+linear_layer = nn.Linear(d_model=512, d_k=64)
+
+# 输入数据: (batch_size, seq_len, d_model)
+input_tensor = torch.randn(32, 10, 512)  # batch=32, seq_len=10, dim=512
+
+# 前向传播
+output = linear_layer(input_tensor)  # 输出形状: (32, 10, 64)
 ```
 
