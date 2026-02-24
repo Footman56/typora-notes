@@ -36,3 +36,5 @@ Interceptor 可以获取Method 方法，目标方法参数，操作ModelAndView 
 | **权限校验（登录检查）**   | **Interceptor**               | 更灵活，可以通过 `@PreHandle` 返回 `false` 直接阻止访问，且能结合 Spring MVC 的注解（如 `@Secured`）进行细粒度控制。 |
 | **修改 ModelAndView**      | **Interceptor**               | 只有 Interceptor 可以在 `postHandle` 中直接操作 `ModelAndView`，Filter 做不到。 |
 | **设置字符编码**           | **Filter**                    | Spring 的 `CharacterEncodingFilter` 就是典型，需要在读取请求体之前设置编码。 |
+
+''
