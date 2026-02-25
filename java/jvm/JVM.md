@@ -50,7 +50,7 @@ ps -ef |grep java
 Jvm 系统分为：
 
 + 类加载器(ClassLoader)： ClassLoader 负责加载字节码文件即 class 文件，class 文件在文件开头有特定的文件标示，并且 ClassLoader 只负责class 文件的加载，**加载完的字节码文件存放在运行时数据区**。
-+ 运行时数据区(Runtime Data Area)： 存放数据的，包括 堆、方法区、虚拟机栈、本地方法栈、程序计数器
++ 运行时数据区(Runtime Data Area)： 存放数据的，包括 堆、元空间区、虚拟机栈、本地方法栈、程序计数器
 + 执行引擎(Execution Engine)：Class 文件被加载后，会把指令和数据信息放入内存中，Execution Engine 则负责把这些命令解释给操作系统，即将 JVM 指令集翻译为操作系统指令集。
 + 本地方法(Native Interface): 负责调用本地接口的。
 
