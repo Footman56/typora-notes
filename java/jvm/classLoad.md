@@ -87,6 +87,7 @@ AppClassLoader 才是直接面向我们用户的加载器，它会加载 Classpa
 打破双亲委派机制：
 
 1. tomcat 为每个web 应用创建独立的类加载器。优先加载 /WEB-INF/classes 下的类，打破双亲委派机制
+2. JDBC (SPI 机制)   JDBC 的核心接口（`java.sql.Driver`）在 `rt.jar` 中由**启动类加载器**加载。但 JDBC 的具体实现（如 MySQL 的驱动 jar 包）在 `classpath` 中，**启动类加载器找不到**。 JDBC 使用**线程上下文类加载器**（`Thread.currentThread().getContextClassLoader()`），它打破了双亲委派，让启动类加载器“逆向”委托给应用程序类加载器去加载实现类。
 
 
 
