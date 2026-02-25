@@ -86,6 +86,8 @@ AppClassLoader 才是直接面向我们用户的加载器，它会加载 Classpa
 
 打破双亲委派机制：
 
+1. tomcat 为每个web 应用创建独立的类加载器。优先加载 /WEB-INF/classes 下的类，打破双亲委派机制
+
 
 
 # 类缓存
