@@ -278,3 +278,30 @@ PUT product_index/_settings
 1. 数据比较少(100条)  使用from + size  
 2. 数据量大需要深度翻页  使用scroll 翻页
 3. 数据量大需要深度翻页 又有实时高并发， 使用Search + after
+
+```
+# 一次查询
+GET products/_search
+{
+  "size": 10,
+  "query": { "match_all": {} },
+  "sort": [
+    { "price": "asc" },
+    { "_id": "asc" }
+  ]
+}
+
+# 返回结果，sort 字段会附带在每条记录上
+{
+  "hits": {
+    "hits": [
+      { "_id": "1", "sort": [100, "1"], ... },
+      { "_id": "2", "sort": [100, "2"], ... },
+      ...
+    ]
+  }
+}
+# 第二次查询
+
+```
+
