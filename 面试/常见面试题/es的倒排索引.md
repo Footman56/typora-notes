@@ -120,4 +120,48 @@ elastic search 使用倒排索引和正排索引：
 
    使用Rollover API ，当索引 Size > 50GB 或者Time > 7days 时自动滚动
 
+   ```java
+   Rollover 依赖一个 写别名（write alias）。
+   1. 创建生命周期策略
+   PUT _ilm/policy/my_policy
+   {
+     "policy": {
+       "phases": {
+         "hot": {
+           "actions": {
+             "rollover": {
+               "max_size": "30gb",
+               "max_age": "7d"
+             }
+           }
+         }
+       }
+     }
+   }
+   
+   2. 创建索引模板
+   PUT _index_template/my_template
+   {
+     "index_patterns": ["my_index-*"],
+     "template": {
+       "settings": {
+         "index.lifecycle.name": "my_policy",
+         "index.lifecycle.rollover_alias": "my_index_write",
+         "number_of_shards": 3
+       }
+     }
+   }
+   3.  创建第一个索引
+   PUT my_index-000001
+   {
+     "aliases": {
+       "my_index_write": {
+         "is_write_index": true
+       }
+     }
+   }
+   ```
+
+   
+
 3. 
