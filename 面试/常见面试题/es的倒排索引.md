@@ -192,3 +192,12 @@ elastic search 使用倒排索引和正排索引：
 4. 查询慢 
 
    + 禁止使用 From +size 深分野，使用Search After
+
+
+
+# es 与mysql 对比
+
+mysql 适合事务ACID , 精准查询，数据强一致性
+
+es: 适合模糊搜索、全文搜索、海量数据分析、最终一致性
+
