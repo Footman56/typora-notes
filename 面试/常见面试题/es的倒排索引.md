@@ -160,8 +160,30 @@ elastic search 使用倒排索引和正排索引：
        }
      }
    }
+   4. 创建别名
+   POST _aliases
+   {
+     "actions": [
+       {
+         "add": {
+           "index": "my_index-*",
+           "alias": "my_index_read"
+         }
+       }
+     ]
+   }
+   5.查询
+    GET my_index_read/_search
+   {
+     "query": {
+       "match": {
+         "name": "iphone"
+       }
+     }
+   }
    ```
 
-   
+3. 海量写入 CPU 飙升
 
-3. 
+   + 使用Bulk API ，每次5～15MB
+   + 将
