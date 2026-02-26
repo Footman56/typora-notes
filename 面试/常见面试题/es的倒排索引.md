@@ -215,5 +215,19 @@ es: 适合模糊搜索、全文搜索、海量数据分析、最终一致性
   + 读写分离
 
 ```json
+PUT product_index
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1
+  }
+}
+
+PUT product_index/_settings
+{
+  "number_of_replicas": 2
+}
 ```
+
+# 保证查询性能
 
