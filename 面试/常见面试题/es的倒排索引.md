@@ -68,3 +68,10 @@ programming   → [3]
 2.  Roaring Bitmaps（位图优化）
 3. 跳表 
 
+elastic search 使用倒排索引和正排索引：
+
+倒排索引用于搜索。
+
+正排索引用于排序和聚合
+
+# es 查询为什么那么快？
