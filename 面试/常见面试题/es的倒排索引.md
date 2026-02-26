@@ -186,4 +186,9 @@ elastic search 使用倒排索引和正排索引：
 3. 海量写入 CPU 飙升
 
    + 使用Bulk API ，每次5～15MB
-   + 将
+   + 将refresh_interval  调大到30s  (默认1s刷新生成新的segment)
+   + 将Translog 设置为 Async   (默认同步落盘保证数据不丢)
+
+4. 查询慢 
+
+   + 禁止使用 From +size 深分野，使用Search After
