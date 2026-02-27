@@ -40,3 +40,9 @@ show  processlist  查看进程状态
 
 
 通过show engine innodb status 来分析死锁
+
+死锁解决方案：
+
+1. 所有事务按照相同的顺序锁定行
+2. 减少锁持有时间
+3. 设置锁超时
