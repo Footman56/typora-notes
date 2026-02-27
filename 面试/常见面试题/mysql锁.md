@@ -13,3 +13,9 @@ show  processlist  查看进程状态
 
 
 行级锁 （锁单行） 仅在事务中生效
+
+生产坑点：行级锁依赖索引，如果索引失效时，全表扫描时，等同于表锁
+
+共享锁（S锁） 读读兼容，读写锁定  SELECT ... LOCK IN SHARE MODE
+
+排他锁（X锁） SELECT  ... FOR UPDATE  或者insert、del、 update  
