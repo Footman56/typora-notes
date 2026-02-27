@@ -19,3 +19,6 @@ show  processlist  查看进程状态
 共享锁（S锁） 读读兼容，读写锁定  SELECT ... LOCK IN SHARE MODE
 
 排他锁（X锁） SELECT  ... FOR UPDATE  或者insert、del、 update  
+
+
+
