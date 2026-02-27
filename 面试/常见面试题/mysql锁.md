@@ -53,3 +53,47 @@ show  processlist  查看进程状态
 
 如果事务准备对行进行加s锁，会自动在表级上 IS 锁， 如果在行准备加X 锁，会自动在表级上 IX 锁。意向锁紧与表级锁互斥
 
+
+
+锁相关排查命令
+
+```
+show processlist
+
+show full processlist
+
+
+-- 重要提示：MySQL 8.② 新特性（旧表innodb_locks已移除）
+-- 1. 查看当前所有锁信息（替代原innodb_locks）
+SELECT * FROM performance_schema.data_locks；
+
+-- 2. 查有锁等待关系（替代原innodb_lock_waits）
+-- 核心字段：blocking_engine_transaction_id（阻塞事务ID）、requesting_engine_transaction_id（请求事务ID）
+SELECT
+blocking_engine_transaction_id AS blocking_trx_id，
+-- 阻塞方事务ID
+equesting_engine_transaction_id AS requesting_trx_id，-- 请求方事务ID
+blocking_lock_id， -- 阻塞方锁ID
+requesting_lock_id -- 请求方锁ID
+FROM performance_schema.data_lock_waits：
+
+
+-- 3. 结合进程表，定位阻塞源对应的SQL（适配8.0新表）
+SELECT
+p.id，-- 进程ID
+p.user，
+p.host，
+p.db，
+p.info， -- 执行的SQL
+L.lock_type， -- 锁类型（TABLE/ROW）
+L.lock_mode，
+-- 锁模式（X/S/IS/IX等）
+L.lock_table -- 锁定的表
+FROM
+information_schema.processlist p
+JOIN
+WHERE
+performance_schema.data_locks 1 ON p.id = SUBSTRING_INDEX（L. lock_id，'：'，1）
+p.state LIKE 'Waiting for%'；-- 筛选等待锁的进程
+```
+
