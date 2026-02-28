@@ -128,5 +128,33 @@
    BGSAVE ¥ 异步阻塞
    ```
 
-## 增量日志
+3. shutdown 触发  
+4. flushall 触发
+
+优点：
+
+文件小、恢复快、适合做冷备份、性能影响小
+
+缺点：
+
+不是实时持久化、两次快照之间数据会丢
+
+## 增量日志（AOF）
+
+把每条写命令追加到文件中, redis 重启时 重新执行AOF 文件里面命令
+
+### 刷盘策略
+
+```
+# 每次命令都fsync 最安全、性能最差
+appendfsync always  
+
+# 每秒fsync 一次 平衡 最多丢1秒数据
+appendfsync everysec
+
+# 交给os 决定，丢很多数据，性能最好
+appendfsync no
+```
+
+### 文件碰涨
 
