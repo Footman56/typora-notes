@@ -248,3 +248,22 @@ Redis的主从复制主要用于实现数据的冗余备份和读分担，并不
 mysql 也会有这个问题
 
 解决方式为：
+
++ 主从+  Orchestrator + proxySQL 
+
+  ```
+  主从复制
+  Orchestrator 负责选主
+  proxySQL 负责路由
+  
+  # 自动化高
+  ```
+
++ InnoDB  Cluster (官方推荐)
+
+  ```
+  MGR 多节点集群 + MySQL Router
+  强一致、自动选举、类似分布式数据库
+  ```
+
+  
