@@ -284,3 +284,26 @@ Redis的主从复制主要用于实现数据的冗余备份和读分担，并不
 setnx+ expire命令。即先用setnx来抢锁，如果抢到之后，再用expire给锁设置一个过期时间，防止锁忘记了释放。
 
 缺陷：非原子操作，加锁后系统异常，没有及时设置过期时间，其他线程永远获取不到锁
+
+## SETNX + value  (系统时间+过期时间)
+
+```java
+ong expires = System.currentTimeMillis（） + expireTime; //系统时间+设置的过期时间
+String expiresStr = String.valueof （expires）；
+// 如果当前锁不存在，返回加锁成功
+if （jedis.setnx（key_resource_id, expiresStr） == 1）｛
+return true；
+// 如果锁已经存在，获取锁的过期时间
+String currentValuestr = jedis.get（key_resource_id）；
+// 如果获取到的过期时间，小于系统当前时间，表示已经过期
+if （currentValuestr ！= null && Long.parseLong（currentValuestr） < System.currentTimeMillis（））｛
+// 锁已过期，获取上一个锁的过期时间，并设置现在锁的过期时间
+String oldValuestr = jedis.getSet （key_resource_id, expiresStr）；
+if （oldValueStr ！= null && oldValueStr.equals（currentValueStr））｛
+// 考虑多线程并发的情况，只有一个线程的设置值和当前值相同，它才可以加锁
+return true；
+｝
+//其他情况，均返回加锁失败
+return false；
+```
+
