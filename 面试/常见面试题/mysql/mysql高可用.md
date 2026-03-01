@@ -43,6 +43,10 @@ mysql 也会有这个问题 （主从复制，主节点）
 
 ![image-20260301101116538](https://raw.githubusercontent.com/Footman56/images-2/master/img202603011011184.png)
 
+ 应用层： 具体业务功能
+
+​	读写分离数据源 AOP + ThreadLocal 切换数据源 （在执行 SQL 前，动态决定用哪个 DataSource）
+
 数据层：（主从复制）
 
 高可用管理层（核心） MGR、Orchestrator（外部）
@@ -52,11 +56,10 @@ mysql 也会有这个问题 （主从复制，主节点）
 + 切换复制拓扑
 + 防止脑裂
 
-代理层：流量控制 （Proxy SQL、Mysql Router）
+代理层：流量控制 （ProxySQL、Mysql Router）
 
 + 读写分离
 + 主库切换后自动路由
 + 连接池管理
 + 限流、熔断
 
- 应用层： 读写分离数据源 AOP + ThreadLocal 切换数据源 （在执行 SQL 前，动态决定用哪个 DataSource）
