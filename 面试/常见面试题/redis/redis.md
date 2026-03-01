@@ -249,11 +249,21 @@ mysql 也会有这个问题
 
 解决方式为：
 
++ MHA   (被替代啦)
+
+  **原理：** 监控主库 → 主库挂了 → 选一个数据最新的从库提升为主库 → 重建复制关系
+
+  + 依赖 SSH
+  + 半自动/自动
+  + 需要自己维护
+
 + 主从+  Orchestrator + proxySQL 
+
+  实时监控 MySQL 拓扑结构，主库故障时自动选举最优从库提升
 
   ```
   主从复制
-  Orchestrator 负责选主
+  Orchestrator 负责选主 （实时监控 MySQL 拓扑，自动故障转移）
   proxySQL 负责路由
   
   # 自动化高
@@ -265,6 +275,8 @@ mysql 也会有这个问题
   MGR 多节点集群 + MySQL Router
   强一致、自动选举、类似分布式数据库
   ```
+
++ mysql + Proxy 层
 
 ​	高可用提现在：
 
