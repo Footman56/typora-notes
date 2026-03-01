@@ -307,3 +307,17 @@ return true；
 return false；
 ```
 
+## SET KEY value Ex  PX NX XX  设置value时同步设置超时时间
+
+锁过期释放啦，但是业务没执行完
+
+锁被别的线程误删
+
+
+
+## Redisson框架
+
+看门狗机制，后台线程每隔10秒检查一下是否还持有锁，如果持有就延长时间
+
+## 多机实现的分布式锁RedLock + Redisson
+
