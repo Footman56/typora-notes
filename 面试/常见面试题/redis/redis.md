@@ -164,7 +164,16 @@ appendfsync no
 
 重写是对AOF重复性指令的整理。
 
-自动重写
+ auto-aof-rewrite-percentage 100：当AOF文件体积达到上次重写之后的体积的100%时，会
+触发AOF重写。
+• auto-aof-rewrite-min-size 64mb：当AOF文件体积超过这个阈值时，会触发AOF重写。
+当AOF文件的体积达到或超过上次重写之后的比例，并且超过了最小体积阈值时，Redis会自动触
+发AOF重写新的AOF文件
+优点： 数据更加可靠、可以保留写命令历史
 
+缺点：文件比较大、恢复速度慢
 
+## 混合持久
+
+redis 4.0 支持混合持久化 ，默认开启
 
