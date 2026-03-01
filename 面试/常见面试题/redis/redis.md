@@ -276,3 +276,11 @@ Redis的主从复制主要用于实现数据的冗余备份和读分担，并不
 <img src="https://raw.githubusercontent.com/Footman56/images-2/master/img202603011102030.png" alt="img" style="zoom:50%;" />
 
 实际中通过Canal框架，模拟从库的备份请求来更新redis
+
+#  分布式锁
+
+## SETNX+ EXPIRE
+
+setnx+ expire命令。即先用setnx来抢锁，如果抢到之后，再用expire给锁设置一个过期时间，防止锁忘记了释放。
+
+缺陷：非原子操作，加锁后系统异常，没有及时设置过期时间，其他线程永远获取不到锁
