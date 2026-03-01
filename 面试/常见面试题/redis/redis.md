@@ -143,7 +143,7 @@
 
 ## 增量日志（AOF）
 
-把每条写命令追加到AOF缓冲区中，根据同步策略写到AOF文件，当AOF文件达到重写策略配置的阈值时，会重写，AOF瘦身, redis 重启时 重新执行AOF 文件里面命令
+把每条写命令追加到AOF缓冲区中，根据同步策略写到AOF文件，当AOF文件达到重写策略配置的阈值时，会重写，AOF瘦身, redis 重启时 重新执行AOF 文件里面命令   bgrewirteao可以重写AOF文件
 
 默认不开启  appendonly yes
 
@@ -168,7 +168,7 @@ appendfsync no
 触发AOF重写。
 • auto-aof-rewrite-min-size 64mb：当AOF文件体积超过这个阈值时，会触发AOF重写。
 当AOF文件的体积达到或超过上次重写之后的比例，并且超过了最小体积阈值时，Redis会自动触
-发AOF重写新的AOF文件
+发AOF重写新的AOF文件  
 优点： 数据更加可靠、可以保留写命令历史
 
 缺点：文件比较大、恢复速度慢
