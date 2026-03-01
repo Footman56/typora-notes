@@ -346,4 +346,6 @@ redLock 优点：
 
 不适合强一致性： 网络延迟、时钟依赖
 
-大厂使用zookeeper 
+## 大厂使用zookeeper 
+
+redis  是基于过期时间的锁  、zookeeper 是基于共识协议的锁
