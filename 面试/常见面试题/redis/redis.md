@@ -485,3 +485,25 @@ redis 为什么那么快？
 # 令牌桶
 
 > 令牌桶算法通过固定速率生成令牌，请求必须获取令牌才能执行，支持突发流量，同时保证平均速率。相比滑动窗口，它内存更小、性能更好，生产环境更常用。一般结合 Redis + Lua 实现原子操作。
+
+1. 计算时间差
+
+2. 计算新增的token 
+
+   ```
+   new_tokens = delta * rate
+   tokens = min(capacity, tokens + new_tokens)
+   ```
+
+3. 判断是否可用
+
+   ```
+   if tokens >= 1:
+       tokens -= 1
+       允许
+   else:
+       拒绝
+   ```
+
+   
+
