@@ -349,3 +349,5 @@ redLock 优点：
 ## 大厂使用zookeeper 
 
 redis  是基于过期时间的锁  、zookeeper 是基于共识协议的锁
+
+zookeeper 是基于 Zab协议，多数派提交、强一致日志复制
