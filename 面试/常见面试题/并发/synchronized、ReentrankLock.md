@@ -16,7 +16,7 @@ ReentrantLock：通过AQS和CAS操作实现的
 
 
 
-解释一下AQS 
+# 解释一下AQS 
 
 一个状态、一个队列、两个动作
 
@@ -39,3 +39,14 @@ ReentrantLock：通过AQS和CAS操作实现的
 。AQS 使用了模板方法模式（Template Method Pattern）。它封装了排队、阻塞、唤醒等复杂的底层逻辑，子类（如 ReentrantLock）只需要实现
 tryAcquire 和 tryRelease 等简单的方法来定义“什么是获取成功，什么是释放成功’即可。”
 
+
+
+
+
+
+
+# 多线程下保证线程安全
+
+1. 使用无状态的对象（只使用局部变量），不可变 final 字段修饰的
+2. 互斥同步锁
+   1. synchronized（方法、代码块、静态方法）、 ReentrantLock
