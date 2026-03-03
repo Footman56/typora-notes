@@ -48,5 +48,22 @@ tryAcquire 和 tryRelease 等简单的方法来定义“什么是获取成功，
 # 多线程下保证线程安全
 
 1. 使用无状态的对象（只使用局部变量），不可变 final 字段修饰的
+
 2. 互斥同步锁
-   1. synchronized（方法、代码块、静态方法）、 ReentrantLock
+
+   1. synchronized（方法、代码块、静态方法）
+   2.  ReentrantLock
+
+3.  非阻塞同步
+
+   1. 原子类  （AtomicInteger） 利用CAS
+
+   2. Volatile  **可见性**（一个线程修改了值，其他线程立马能看到）和**禁止指令重排序**。它**不能保证原子性**。例如 `count++` 这种“读取-修改-写入”的操作，使用 `volatile` 修饰依然不安全，需要配合原子类或锁使用。
+
+4. ThrealLock  ,数据单个线程内访问
+
+5. 安全的容器
+
+   1. `ConcurrentHashMap`（替代 `Hashtable` 或 `Collections.synchronizedMap`）
+   2. `CopyOnWriteArrayList`（适合读多写少的场景）
+   3. `BlockingQueue`（常用于生产者-消费者模式）
