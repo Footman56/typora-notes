@@ -30,7 +30,7 @@ ReentrantLock：通过AQS和CAS操作实现的
 • 加锁（Acquire）：尝试用 CAS 操作修改 state。
 •如果成功，拿锁走人。
 • 如果失败，封装成 Node 入队，并调用 LockSupport.park（）让线程阻塞。
-◎
+
 解锁（Release）：修改 state（通常是减 1）。
 • 如果 state 归零，表示锁彻底释放，AQS 会唤醒（unpark）队列头部的线程去抢锁。
 3.设计模式：
