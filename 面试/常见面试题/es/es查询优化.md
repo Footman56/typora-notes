@@ -48,3 +48,15 @@ node.attr.box_type: cold
 ```
 
 3. 关联索引模版
+
+   在索引模版中指定ILM策略 和热数据节点分配规则，
+
+# 三、字段精简和预处理
+
+在索引中适当的冗余多个字段，避免查询多个e s做数据join
+
+# 四、分页优化
+
+1. form +size
+2. scroller  
+3. search_after  : 基于上页的排序结构
