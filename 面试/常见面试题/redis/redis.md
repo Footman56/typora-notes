@@ -315,6 +315,8 @@ return false；
 
 锁被别的线程误删
 
+NX 保证互斥性
+
 
 
 ## Redisson框架
