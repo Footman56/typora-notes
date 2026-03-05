@@ -309,13 +309,30 @@ return true；
 return false；
 ```
 
-## SET KEY value Ex  PX NX XX  设置value时同步设置超时时间
+## SET KEY unique_client_id   NX   PX XX  设置value时同步设置超时时间
 
 锁过期释放啦，但是业务没执行完
 
 锁被别的线程误删
 
-NX 保证互斥性
+NX 保证互斥性：
+
+unique_client_id 保证是当前线程拿到的锁，不是线程的
+
+
+
+ 安全解锁
+
+````lua
+/ Lua脚本：先比较ID，再删除
+if redis.call("get", KEYS[1]) == ARGV[1] then
+    return redis.call("del", KEYS[1])
+else
+    return 0
+end
+````
+
+
 
 
 
