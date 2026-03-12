@@ -13,3 +13,7 @@ key:sk-api-1ANf1yFIARm40cbGIFtNKlkApqzEVkzTXQflgOfWVAQhn4ZD5v8O8RkmNs24wKbk979WI
 三、创建kimi -apikey
 
 sk-4nFMihCUhjqSSEu16TxwUG9UoLSZOWVpK6yeEX36H0vsNSfG
+
+四、创建google place api key
+
+AIzaSyARTKS2rCuSpCLCyu8ijJiWBypsPhFhANk
