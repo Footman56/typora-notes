@@ -17,3 +17,7 @@ sk-4nFMihCUhjqSSEu16TxwUG9UoLSZOWVpK6yeEX36H0vsNSfG
 四、创建google place api key
 
 AIzaSyARTKS2rCuSpCLCyu8ijJiWBypsPhFhANk
+
+五、创建gemini api key
+
+AIzaSyCWXytjY0YtLsU2C7GUO3IIpqqCewDaE5g
